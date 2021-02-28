@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: random-string-svc
+  name: ping-pong-svc
 spec:
   type: ClusterIP
   selector:
-    app: random-string
+    app: ping-pong
   ports:
-    - port: 8001
+    - port: 3001
       protocol: TCP
       targetPort: 3000
