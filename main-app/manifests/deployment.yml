@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: random-string
-          image: niklasmtj/main-app
+          image: niklasmtj/main-app:v2
