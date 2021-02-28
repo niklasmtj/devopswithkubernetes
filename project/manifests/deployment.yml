@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: project
-          image: niklasmtj/devops-project:v-0-2
+          image: niklasmtj/devops-project:v-0-3
