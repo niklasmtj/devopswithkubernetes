@@ -1,16 +1,27 @@
 import { v4 } from "uuid";
 import express from 'express';
-import path from 'path'
+import dotenv from 'dotenv';
+import { readFile } from 'fs';
+import path from 'path';
+
+dotenv.config()
 
 const PORT = 3000;
 const app = express();
 const randomString = v4();
 
+const TIMESTAMP_PATH = path.join("/", "app", "files");
+
 let timeStamp;
 
 const printString = () => {
-  timeStamp = new Date().toISOString();
-  console.log(`${timeStamp}: ${randomString}`)
+  readFile(`${TIMESTAMP_PATH}/timestamp.txt`, {encoding: "utf-8"}, (err, data) => {
+    if (err) {
+      console.error(err.message);
+    }
+    timeStamp = data;
+    console.log(`${timeStamp}: ${randomString}`)
+  })
 }
 app.get('/', (req, res) => res.send(`${timeStamp}: ${randomString}`));
 
