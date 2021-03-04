@@ -12,6 +12,13 @@ spec:
       labels:
         app: ping-pong
     spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: ping-pong
-          image: niklasmtj/ping-pong:v1
+          image: niklasmtj/ping-pong:latest
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /app/files

@@ -1,6 +1,9 @@
 FROM node:14
 
-WORKDIR /usr/src/app
+WORKDIR /app
+
+# RUN chown -R -v node:node /app 
+# USER node
 
 # Install app dependencies
 COPY package*.json ./

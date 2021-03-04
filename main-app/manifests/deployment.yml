@@ -18,12 +18,12 @@ spec:
             claimName: image-claim
       containers:
         - name: random-string-server
-          image: niklasmtj/main-app-server:v1.3
+          image: niklasmtj/main-app-server:latest
           volumeMounts: # Mount volume
           - name: shared-image
             mountPath: /app/files
         - name: random-string-generator
-          image: niklasmtj/main-app-generator:v1.3
+          image: niklasmtj/main-app-generator:latest
           volumeMounts: # Mount volume
           - name: shared-image
             mountPath: /app/files
