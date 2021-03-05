@@ -1,6 +1,6 @@
 # devopswithkubernetes
 
-## Ex 1
+## Exercise 1
 
 Exercise | Directory
 ------ | ------
@@ -17,3 +17,7 @@ Exercise | Directory
 1.11   | `main-app` and `ping-pong`
 1.12   | `project`
 1.13   | `project`
+
+The images defined in the deployments use the `:latest` tag. This is not a good practice in production but is here used for quicker deployment of changed containers. In production it is recommended to use fixed container labels or `sha` checksums to reduce possible problems with newer containers.
+
+The `project` is labeled as seen in the exercises. The releases can be found [here](https://github.com/niklasmtj/devopswithkubernetes/releases).
