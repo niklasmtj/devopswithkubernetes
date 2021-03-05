@@ -13,3 +13,7 @@ Exercise | Directory
 1.07   | `main-app`
 1.08   | `project`
 1.09   | `main-app` and `ping-pong`
+1.10   | `main-app` and `ping-pong`
+1.11   | `main-app` and `ping-pong`
+1.12   | `project`
+1.13   | `project`
