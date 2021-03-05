@@ -8,7 +8,8 @@ dotenv.config()
 const PORT = 3001;
 const app = express();
 
-const TIMESTAMP_PATH = path.join("/", "app", "files");
+// const TIMESTAMP_PATH = path.join("/", "app", "files");
+const TIMESTAMP_PATH = process.cwd();
 
 const generateTimestampFile = () => {
   const d = new Date().toISOString();

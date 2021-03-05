@@ -7,6 +7,7 @@ spec:
   selector:
     app: random-string
   ports:
-    - port: 8001
+    - name: http
+      port: 80
       protocol: TCP
       targetPort: 3000

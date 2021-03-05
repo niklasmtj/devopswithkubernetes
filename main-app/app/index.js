@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { readFile } from 'fs/promises';
 import path from 'path';
+import fetch from 'node-fetch';
 
 dotenv.config()
 
@@ -10,22 +11,26 @@ const PORT = 3000;
 const app = express();
 const randomString = v4();
 
-const TIMESTAMP_PATH = path.join("/", "app", "files");
-// const TIMESTAMP_PATH = process.env.NODE_ENV ? path.join("/", "app", "files") : process.cwd();
+// const TIMESTAMP_PATH = path.join("/", "app", "files");
+// const TIMESTAMP_PATH = process.env.NODE_ENV === "dev" ? process.cwd() : path.join("/", "app", "files");
+const TIMESTAMP_PATH = process.cwd();
+const BASE_URL = process.env.NODE_ENV === "dev" ? "http://localhost:3001" : "http://ping-pong-svc"
+
 
 let timeStamp;
 let pingPong;
 
 const readTimestamp = async () => {
-  try {
-    const data = await readFile(`${TIMESTAMP_PATH}/timestamp.txt`, { encoding: "utf-8" })
-    return data;
-  } catch (err) {
-    if (err) {
-      console.error(err.message);
-      return "Error happened";
-    }
-  }
+  // try {
+  //   const data = await readFile(`${TIMESTAMP_PATH}/timestamp.txt`, { encoding: "utf-8" })
+  //   return data;
+  // } catch (err) {
+  //   if (err) {
+  //     console.error(err.message);
+  //     return new Date().toISOString();
+  //   }
+  // }
+  return new Date().toISOString();
 }
 
 const readPingPongFile = async () => {
@@ -40,12 +45,20 @@ const readPingPongFile = async () => {
   }
 }
 
-const getStringValues = () => {
-  timeStamp = readTimestamp();
-  pingPong = readPingPongFile();
+const getPingPongCount = async () => {
+  const {pingCounter} = await fetch(`${BASE_URL}/ping`).then((res) => res.json())
+  return pingCounter;
+  // return (await fetch(`${BASE_URL}/ping`).then((res) => res.json()).pingCounter)
 }
 
-getStringValues();
+const getStringValues = async () => {
+  timeStamp = readTimestamp();
+  // Pre Part 2
+  // pingPong = readPingPongFile();
+  pingPong = await getPingPongCount();
+}
+
+// getStringValues();
 
 const buildString = (ts, pg) => {
   return `
@@ -56,7 +69,9 @@ const buildString = (ts, pg) => {
 
 app.get('/', async (req, res) => {
   const t = await readTimestamp();
-  const p = await readPingPongFile();
+  // pre Part 2
+  // const p = await readPingPongFile();
+  const p = await getPingPongCount();
   const s = buildString(t, p)
   res.send(s);
 });
@@ -64,7 +79,9 @@ app.get('/', async (req, res) => {
 const printingInterval = setInterval(async () => {
   // getStringValues()
   const t = await readTimestamp();
-  const p = await readPingPongFile();
+  // pre Part 2
+  // const p = await readPingPongFile();
+  const p = await getPingPongCount();
   const s = buildString(t, p)
   console.log(s);
 }, 5000);

@@ -11,8 +11,8 @@ spec:
       - path: /
         backend:
           serviceName: random-string-svc
-          servicePort: 8001
+          servicePort: 80
       - path: /pingpong
         backend:
           serviceName: ping-pong-svc
-          servicePort: 3001
+          servicePort: 80

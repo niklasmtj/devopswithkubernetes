@@ -12,18 +12,18 @@ spec:
       labels:
         app: random-string
     spec:
-      volumes:
-        - name: shared-image
-          persistentVolumeClaim:
-            claimName: image-claim
+      # volumes:
+      #   - name: shared-image
+      #     persistentVolumeClaim:
+      #       claimName: image-claim
       containers:
         - name: random-string-server
           image: niklasmtj/main-app-server:latest
-          volumeMounts: # Mount volume
-          - name: shared-image
-            mountPath: /app/files
+          # volumeMounts: # Mount volume
+          # - name: shared-image
+          #   mountPath: /app/files
         - name: random-string-generator
           image: niklasmtj/main-app-generator:latest
-          volumeMounts: # Mount volume
-          - name: shared-image
-            mountPath: /app/files
+          # volumeMounts: # Mount volume
+          # - name: shared-image
+          #   mountPath: /app/files
