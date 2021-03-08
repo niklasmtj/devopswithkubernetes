@@ -1,9 +1,28 @@
-import { baseDir } from "../pages"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { baseDir, baseURL } from "../pages"
 
-export default ({ date }: { date: string }) => {
+export const Image = ({ date }: { date: string }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!imageLoaded) {
+      getImageStatus();
+    }
+  })
+    
+  const getImageStatus =  async () => {
+    const {data} = await axios.get(`${baseURL}/helper/image`)
+    const loaded = JSON.parse(data.image);
+    setImageLoaded(loaded);
+  }
+ 
   return (
-    <>
-      <img src={`${baseDir}/files/${date}.jpg`} alt="Picture from Picsum" width="30%"></img>
+    <>{
+      imageLoaded && (
+        <img src={`${baseURL}/public/images/${date}.jpg`} alt="Picture from Picsum" width="30%"></img>
+      )
+    }
     </>
   )
 }

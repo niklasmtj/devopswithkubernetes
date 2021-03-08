@@ -1,11 +1,12 @@
 import { GetServerSideProps, GetStaticProps } from 'next';
 import Head from 'next/head'
 import { useState } from 'react';
-import Image from '../components/Image'
 import { Todo } from '../types/todo';
 import axios from 'axios'
+import { Image } from '../components/Image';
 
 export const baseDir = __dirname;
+// 8081 port because of the client side's location
 export const baseURL = "http://localhost:8081/api";
 export default function Home({ todosDb }: { todosDb: Todo[] }) {
 
@@ -51,7 +52,8 @@ export default function Home({ todosDb }: { todosDb: Todo[] }) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const { data } = await axios.get("http://localhost:8081/api/todos/")
+    // 3001 because its server side => Port that the server sees
+    const { data } = await axios.get("http://localhost:3001/api/todos/")
     const todosDb = JSON.parse(data.todos);
     return {
       props: {
@@ -59,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       },
     }
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     return {
       props: {
         todosDb: []
