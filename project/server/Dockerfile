@@ -8,7 +8,7 @@ RUN npm install --quiet && npm run build
 FROM node:14
 ENV NODE_ENV=production
 WORKDIR /app
-COPY --from=build /app/build /app/
+COPY --from=build /app/ /app/
 COPY package*.json ./
 RUN chown -R node:node .
 USER node

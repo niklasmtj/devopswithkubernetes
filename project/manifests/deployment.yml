@@ -13,5 +13,15 @@ spec:
         app: project
     spec:
       containers:
-        - name: project
-          image: niklasmtj/devops-project:v-0-3
+        - name: project-frontend
+          image: niklasmtj/devops-project-frontend:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+        - name: project-backend
+          image: niklasmtj/devops-project-backend:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: project-ingress
+  name: project-ingress-frontend
 spec:
   rules:
   - http:
@@ -9,4 +9,17 @@ spec:
       - path: /
         backend:
           serviceName: project-svc
-          servicePort: 2345
+          servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: project-ingress-backend
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: project-svc
+          servicePort: 8080
