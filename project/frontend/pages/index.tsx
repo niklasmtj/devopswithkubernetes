@@ -7,7 +7,7 @@ import { Image } from '../components/Image';
 
 export const baseDir = __dirname;
 // 8081 port because of the client side's location
-export const baseURL = "http://localhost:8081/api";
+export const baseURL = "/api";
 export default function Home({ todosDb }: { todosDb: Todo[] }) {
 
   const [todoInput, setTodoInput] = useState("")
