@@ -28,3 +28,5 @@ Exercise | Directory
 ------ | ------
 2.01   | `main-app` and `ping-pong`
 2.02   | `project`
+2.03   | `main-app` and `ping-pong`
+2.04   | `project`

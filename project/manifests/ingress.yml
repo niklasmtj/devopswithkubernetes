@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: project-ingress-frontend
+  namespace: project-ns
 spec:
   rules:
   - http:
@@ -15,6 +16,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: project-ingress-backend
+  namespace: project-ns
 spec:
   rules:
   - http:
