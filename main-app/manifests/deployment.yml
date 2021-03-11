@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: main-app
   name: random-string
 spec:
   replicas: 1
@@ -22,8 +23,16 @@ spec:
           # volumeMounts: # Mount volume
           # - name: shared-image
           #   mountPath: /app/files
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
         - name: random-string-generator
           image: niklasmtj/main-app-generator:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           # volumeMounts: # Mount volume
           # - name: shared-image
           #   mountPath: /app/files

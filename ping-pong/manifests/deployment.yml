@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: main-app
   name: ping-pong
 spec:
   replicas: 1
@@ -19,6 +20,10 @@ spec:
       containers:
         - name: ping-pong
           image: niklasmtj/ping-pong:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           # volumeMounts: # Mount volume
           # - name: shared-image
           #   mountPath: /app/files
