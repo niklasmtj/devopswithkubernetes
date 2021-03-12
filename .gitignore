@@ -1,5 +1,5 @@
 node_modules
 .env
 files/
-secret.yaml
-secret.yml
+secret.yaml*
+secret.yml*

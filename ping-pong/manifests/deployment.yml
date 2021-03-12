@@ -20,6 +20,13 @@ spec:
       containers:
         - name: ping-pong
           image: niklasmtj/ping-pong:latest
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                # Get Postgres Password from secret
+                secretKeyRef:
+                  name: pingpong-db-secret
+                  key: POSTGRES_PASSWORD
           resources:
             limits:
               memory: "512Mi"
