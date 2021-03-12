@@ -62,7 +62,8 @@ const getStringValues = async () => {
 
 const buildString = (ts, pg) => {
   return `
-  ${ts}: ${randomString}
+  ${process.env.MESSAGE} \n
+  ${ts}: ${randomString} \n
   Ping / Pong: ${pg}
   `
 }

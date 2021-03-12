@@ -20,6 +20,13 @@ spec:
       containers:
         - name: random-string-server
           image: niklasmtj/main-app-server:latest
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: main-app-config-map
+                  key: message
+                
           # volumeMounts: # Mount volume
           # - name: shared-image
           #   mountPath: /app/files
