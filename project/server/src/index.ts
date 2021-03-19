@@ -1,3 +1,4 @@
+import dotenv from 'dotenv'
 import express from 'express';
 import path from 'path'
 import todosRoutes from './routes/todos'
@@ -5,10 +6,12 @@ import helperRoutes from './routes/helper'
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-const app = express();
-const PORT = 3001;
+dotenv.config();
 
+const app = express();
+const PORT = process.env.PORT || 3001;
 const BASE_PATH = __dirname;
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))

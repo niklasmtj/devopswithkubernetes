@@ -9,7 +9,7 @@ const checkForTodaysImage = async () => {
   try {
     const fileFound = await stat(join(BASE_PATH, "public", "images", `${currentDate}.jpg`))
     if (fileFound) {
-      const todaysImage = readTodaysImage(currentDate);
+      const todaysImage: Buffer = await readTodaysImage(currentDate);
       return todaysImage
     } else {
       await fetchTodaysImage(currentDate)

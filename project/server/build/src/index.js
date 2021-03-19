@@ -4,14 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BASE_PATH = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const todos_1 = __importDefault(require("./routes/todos"));
 const helper_1 = __importDefault(require("./routes/helper"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
+dotenv_1.default.config();
 const app = express_1.default();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const BASE_PATH = __dirname;
 exports.BASE_PATH = BASE_PATH;
 app.use(cors_1.default());
