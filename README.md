@@ -30,3 +30,6 @@ Exercise | Directory
 2.02   | `project`
 2.03   | `main-app` and `ping-pong`
 2.04   | `project`
+2.06   | `main-app` and `ping-pong`
+2.07   | `main-app` and `ping-pong`
+2.08   | `project`

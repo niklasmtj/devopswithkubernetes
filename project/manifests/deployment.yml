@@ -15,13 +15,20 @@ spec:
     spec:
       containers:
         - name: project-frontend
-          image: niklasmtj/devops-project-frontend:v1
+          image: niklasmtj/devops-project-frontend:v1.2
           resources:
             limits:
               memory: "512Mi"
               cpu: "500m"
         - name: project-backend
-          image: niklasmtj/devops-project-backend:v1
+          image: niklasmtj/devops-project-backend:v1.2
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                # Get Database URL from secret
+                secretKeyRef:
+                  name: project-db-secret
+                  key: DATABASE_URL
           resources:
             limits:
               memory: "512Mi"

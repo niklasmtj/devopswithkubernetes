@@ -7,7 +7,8 @@ import { Image } from '../components/Image';
 
 export const baseDir = __dirname;
 // 8081 port because of the client side's location
-export const baseURL = "/api";
+export const baseURL = process.env.NEXT_PUBLIC_API_URL ||  "/api";
+
 export default function Home({ todosDb }: { todosDb: Todo[] }) {
 
   const [todoInput, setTodoInput] = useState("")
@@ -19,7 +20,7 @@ export default function Home({ todosDb }: { todosDb: Todo[] }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await axios.post(`${baseURL}/todos/add`, { name: todoInput, done: false })
-    const updatedTodos = JSON.parse(data.todos);
+    const updatedTodos = data.todos;
 
     setTodoInput("")
     setTodos(updatedTodos);
@@ -54,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   try {
     // 3001 because its server side => Port that the server sees
     const { data } = await axios.get("http://localhost:3001/api/todos/")
-    const todosDb = JSON.parse(data.todos);
+    const todosDb = data.todos;
     return {
       props: {
         todosDb,
