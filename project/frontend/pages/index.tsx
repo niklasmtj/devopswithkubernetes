@@ -14,16 +14,27 @@ export default function Home({ todosDb }: { todosDb: Todo[] }) {
   const [todoInput, setTodoInput] = useState("")
   const [todos, setTodos] = useState(todosDb || []);
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const d = new Date()
   const currentDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await axios.post(`${baseURL}/todos/add`, { name: todoInput, done: false })
-    const updatedTodos = data.todos;
-
-    setTodoInput("")
-    setTodos(updatedTodos);
+    if (data.error) {
+      setError(true);
+      setErrorMessage(data.message);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    } else {
+      const updatedTodos = data.todos;
+  
+      setTodoInput("")
+      setTodos(updatedTodos);
+    }
   }
 
   const handleInputFieldChange = (event: any) => {
@@ -38,9 +49,14 @@ export default function Home({ todosDb }: { todosDb: Todo[] }) {
       <div>
         <Image date={currentDate} />
         <form onSubmit={handleSubmit}>
-          <input type="text" maxLength={140} value={todoInput} onChange={handleInputFieldChange}></input>
+          <input type="text"  value={todoInput} onChange={handleInputFieldChange}></input>
           <button type="submit">Create TODO</button>
         </form>
+        {
+          error && (
+            <p>{errorMessage}</p>
+          )
+        }
         <ul>
           {todos.map((todo: Todo) => (
             <li key={todo.id}>{todo.name}</li>
