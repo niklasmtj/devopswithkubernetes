@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: main-app
+  name: random-string
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: random-string
+  template:
+    metadata:
+      labels:
+        app: random-string
+    spec:
+      # volumes:
+      #   - name: shared-image
+      #     persistentVolumeClaim:
+      #       claimName: image-claim
+      containers:
+        - name: random-string-server
+          image: niklasmtj/main-app-server:latest
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: main-app-config-map
+                  key: message
+                
+          # volumeMounts: # Mount volume
+          # - name: shared-image
+          #   mountPath: /app/files
+          # resources:
+          #   limits:
+          #     memory: "512Mi"
+          #     cpu: "500m"
+        - name: random-string-generator
+          image: niklasmtj/main-app-generator:latest
+          # resources:
+          #   limits:
+          #     memory: "512Mi"
+          #     cpu: "500m"
+          # volumeMounts: # Mount volume
+          # - name: shared-image
+          #   mountPath: /app/files

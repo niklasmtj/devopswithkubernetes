@@ -24,6 +24,10 @@ const timestampInterval = setInterval(() => {
   generateTimestampFile();
 }, 5000)
 
+app.get("/", (req, res) => {
+  res.sendStatus(200);
+})
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });

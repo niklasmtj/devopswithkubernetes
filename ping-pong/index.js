@@ -71,7 +71,7 @@ const increaseCounter = async () => {
   return pingCounter;
 }
 
-app.get('/', async (req, res) => {
+app.get('/pingpong', async (req, res) => {
   const count = await increaseCounter();
   writeFile(`${TIMESTAMP_PATH}/ping-pong.txt`, count.toString(), { encoding: 'utf-8' }, (err) => {
     if (err) console.error(err.message);
@@ -79,7 +79,7 @@ app.get('/', async (req, res) => {
   res.send(`pong ${count}`)
 });
 
-app.get("/ping", async (req, res) => {
+app.get("/pingpong/ping", async (req, res) => {
   const count = await increaseCounter();
   res.json({ pingCounter: count });
 })

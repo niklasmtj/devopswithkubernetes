@@ -46,7 +46,7 @@ const readPingPongFile = async () => {
 }
 
 const getPingPongCount = async () => {
-  const {pingCounter} = await fetch(`${BASE_URL}/ping`).then((res) => res.json())
+  const {pingCounter} = await fetch(`${BASE_URL}/pingpong/ping`).then((res) => res.json())
   return pingCounter;
   // return (await fetch(`${BASE_URL}/ping`).then((res) => res.json()).pingCounter)
 }
@@ -57,8 +57,6 @@ const getStringValues = async () => {
   // pingPong = readPingPongFile();
   pingPong = await getPingPongCount();
 }
-
-// getStringValues();
 
 const buildString = (ts, pg) => {
   return `
@@ -74,11 +72,10 @@ app.get('/', async (req, res) => {
   // const p = await readPingPongFile();
   const p = await getPingPongCount();
   const s = buildString(t, p)
-  res.send(s);
+  res.status(200).send(s);
 });
 
 const printingInterval = setInterval(async () => {
-  // getStringValues()
   const t = await readTimestamp();
   // pre Part 2
   // const p = await readPingPongFile();

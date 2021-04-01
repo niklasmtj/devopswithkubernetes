@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: random-string-ingress
+  namespace: main-app
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: random-string-svc
+          servicePort: 80
+      - path: /pingpong
+        backend:
+          serviceName: ping-pong-svc
+          servicePort: 80
