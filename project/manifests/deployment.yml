@@ -1,4 +1,3 @@
-# Testcomment to trigger GH Actions
 apiVersion: apps/v1
 kind: Deployment
 metadata:
