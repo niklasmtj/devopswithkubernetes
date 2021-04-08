@@ -36,7 +36,8 @@ jobs:
       - name: Delete namespace in Cluster
         working-directory: project
         run: |-
-          ./kustomize edit set namespace ${GITHUB_REF#refs/heads/}
-          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+          safe_tag_name=$(sed 's/[^a-zA-Z0-9_]/-/g' <<< ${GITHUB_REF#refs/heads/})
+          ./kustomize edit set namespace $safe_tag_name
+          kubectl config set-context --current --namespace=$safe_tag_name
           kubectl delete -k .
-          kubectl delete namespace ${GITHUB_REF#refs/heads/}
+          kubectl delete namespace $safe_tag_name
