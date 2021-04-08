@@ -53,6 +53,7 @@ spec:
           volumeMounts:
             - name: pg-data
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
             # Run table creation on init
             - name: project-db-seeding
               mountPath: /docker-entrypoint-initdb.d
@@ -66,7 +67,7 @@ spec:
         namespace: project-ns
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
+        # storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
