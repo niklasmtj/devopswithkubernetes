@@ -43,6 +43,8 @@ The `project` is labeled as seen in the exercises. The releases can be found [he
 | 3.01     | `ping-pong`                |
 | 3.02     | `main-app` and `ping-pong` |
 | 3.03     | `project` |
+| 3.04     | `project` |
+| 3.05     | `project` |
 
 
 ### Exercise 3.01

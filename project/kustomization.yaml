@@ -10,6 +10,6 @@ resources:
 - gke-manifests/statefulset.yaml
 images:
 - name: PROJECT/BACKEND_IMAGE
-  newName: niklasmtj/devops-project-backend:latest
+  newName: niklasmtj/devops-project-backend:main
 - name: PROJECT/FRONTEND_IMAGE
-  newName: niklasmtj/devops-project-frontend:latest
+  newName: niklasmtj/devops-project-frontend:main
