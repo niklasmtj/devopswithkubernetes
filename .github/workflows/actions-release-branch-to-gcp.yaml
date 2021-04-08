@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Create image name and tag
-        run: echo "FRONTEND_IMAGE_WITH_TAG=niklasmtj/$FRONTEND_IMAGE:${env.SAFE_TAG_NAME}" >> $GITHUB_ENV
+        run: echo "FRONTEND_IMAGE_WITH_TAG=niklasmtj/$FRONTEND_IMAGE:${{env.SAFE_TAG_NAME}}" >> $GITHUB_ENV
       -
         name: Build and push frontend
         uses: docker/build-push-action@v2
@@ -57,7 +57,7 @@ jobs:
       # Set up Backend Image
 
       - name: Create image name and tag
-        run: echo "BACKEND_IMAGE_WITH_TAG=niklasmtj/$BACKEND_IMAGE:${env.SAFE_TAG_NAME}" >> $GITHUB_ENV
+        run: echo "BACKEND_IMAGE_WITH_TAG=niklasmtj/$BACKEND_IMAGE:${{env.SAFE_TAG_NAME}}" >> $GITHUB_ENV
       -
         name: Build and push backend
         uses: docker/build-push-action@v2
