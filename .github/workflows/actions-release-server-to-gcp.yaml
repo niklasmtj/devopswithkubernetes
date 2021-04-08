@@ -77,5 +77,5 @@ jobs:
           kubectl config set-context --current --namespace=project
           ./kustomize edit set image PROJECT/FRONTEND_IMAGE=${{env.FRONTEND_IMAGE_WITH_TAG}}
           ./kustomize edit set image PROJECT/BACKEND_IMAGE=${{env.BACKEND_IMAGE_WITH_TAG}}
-          kubectl apply -k .
+          kubectl apply -k ./project
           kubectl rollout status deployment $FRONTEND_IMAGE
