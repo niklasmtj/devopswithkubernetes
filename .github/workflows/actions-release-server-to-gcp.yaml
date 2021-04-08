@@ -72,10 +72,11 @@ jobs:
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
       - name: Deploy
+        working-directory: project
         run: |-
           kubectl create namespace project || true
           kubectl config set-context --current --namespace=project
           ./kustomize edit set image PROJECT/FRONTEND_IMAGE=${{env.FRONTEND_IMAGE_WITH_TAG}}
           ./kustomize edit set image PROJECT/BACKEND_IMAGE=${{env.BACKEND_IMAGE_WITH_TAG}}
-          kubectl apply -k ./project
+          kubectl apply -k .
           kubectl rollout status deployment $FRONTEND_IMAGE
