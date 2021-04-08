@@ -34,7 +34,7 @@ jobs:
       - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
       - name: Create safe tag
-        run: echo "SAFE_TAG_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/[^a-zA-Z0-9_]/-/g'" >> $GITHUB_ENV
+        run: echo "SAFE_TAG_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/[^a-zA-Z0-9_]/-/g')" >> $GITHUB_ENV
       # Set up Frontend Image
 
       -

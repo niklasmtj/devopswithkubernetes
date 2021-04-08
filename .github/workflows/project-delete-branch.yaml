@@ -1,4 +1,4 @@
-name: Release project application on own branch
+name: Delete namespace in Cluster after branch deletion
 
 on:
   delete:
