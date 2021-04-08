@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- gke-manifests/deployment.yaml
+- gke-manifests/service.yaml
+- gke-manifests/configmap.yaml
+- gke-manifests/cronjob.yaml
+- gke-manifests/ingress.yaml
+- gke-manifests/sealedsecret.yaml
+- gke-manifests/statefulset.yaml
+images:
+- name: PROJECT/BACKEND_IMAGE
+  newName: niklasmtj/devops-project-backend:latest
+- name: PROJECT/FRONTEND_IMAGE
+  newName: niklasmtj/devops-project-frontend:latest

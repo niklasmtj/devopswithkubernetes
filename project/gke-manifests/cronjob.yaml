@@ -1,0 +1,23 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: create-daily-todo
+  namespace: project-ns
+spec:
+  # Minute | Hour | DayOfMonth | Month | DayOfWeek
+  # Run every day at 6:00
+  schedule: "30 7 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: create-daily-todo
+            image: curlimages/curl:7.75.0
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - "echo -n 'Read: ';  curl -sI https://en.wikipedia.org/wiki/Special:Random | grep 'location' | awk '{print $2}'"
+          restartPolicy: OnFailure

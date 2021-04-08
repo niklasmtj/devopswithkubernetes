@@ -23,26 +23,49 @@ jobs:
         with:
           service_account_key: ${{secrets.GKE_SA_KEY}}
           project_id: ${{secrets.GKE_PROJECT}}
-      - run: gcloud --quiet auth configure-docker
+      # - run: gcloud --quiet auth configure-docker
       - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
       # Set up Frontend Image
 
-      - name: Create image name and tag
-        run: echo "FRONTEND_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$FRONTEND_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
-      - name: Build container image
-        run: docker build --tag "${{env.FRONTEND_IMAGE_WITH_TAG}}" .
-      - name: Publish to gcr
-        run: docker push "${{env.FRONTEND_IMAGE_WITH_TAG}}"
-
-      # Set up Backend Image
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Create image name and tag
-        run: echo "BACKEND_IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$BACKEND_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
-      - name: Build container image
-        run: docker build --tag "${{env.BACKEND_IMAGE_WITH_TAG}}" .
-      - name: Publish to gcr
-        run: docker push "${{env.BACKEND_IMAGE_WITH_TAG}}"
+        run: echo "FRONTEND_IMAGE_WITH_TAG=niklasmtj/$FRONTEND_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+      -
+        name: Build and push frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{env.FRONTEND_IMAGE_WITH_TAG}}
+
+      # - name: Build container image
+      #   run: docker build --tag "${{env.FRONTEND_IMAGE_WITH_TAG}}" ./frontend
+      # - name: Publish to gcr
+      #   run: docker push "${{env.FRONTEND_IMAGE_WITH_TAG}}"
+
+      # # Set up Backend Image
+
+      - name: Create image name and tag
+        run: echo "BACKEND_IMAGE_WITH_TAG=niklasmtj/$BACKEND_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+      -
+        name: Build and push backend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          push: true
+          tags: ${{env.BACKEND_IMAGE_WITH_TAG}}
+
+      # - name: Build container image
+      #   run: docker build --tag "${{env.BACKEND_IMAGE_WITH_TAG}}" ./server
+      # - name: Publish to gcr
+      #   run: docker push "${{env.BACKEND_IMAGE_WITH_TAG}}"
 
       - name: Set up Kustomize
         run: |-

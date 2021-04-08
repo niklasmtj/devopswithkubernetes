@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: project-ingress-frontend
+  namespace: project-ns
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: project-svc
+          servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: project-ingress-backend
+  namespace: project-ns
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: project-svc
+          servicePort: 8080

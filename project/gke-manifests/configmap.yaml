@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: project-ns
+  name: project-create-db-cm
+data:
+  pg_data: "/var/lib/postgresql/data/pgdata"
+  seed.sql: |
+    CREATE TABLE IF NOT EXISTS todos (ID SERIAL PRIMARY KEY,name TEXT,done BOOLEAN);
+  

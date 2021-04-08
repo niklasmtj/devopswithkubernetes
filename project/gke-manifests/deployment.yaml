@@ -1,0 +1,37 @@
+# Trigger gh action
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project-ns
+  name: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      containers:
+        - name: project-frontend
+          image: PROJECT/FRONTEND_IMAGE
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+        - name: project-backend
+          image: PROJECT/BACKEND_IMAGE
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                # Get Database URL from secret
+                secretKeyRef:
+                  name: project-db-secret
+                  key: DATABASE_URL
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+        
