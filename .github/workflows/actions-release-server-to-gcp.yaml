@@ -11,6 +11,11 @@ env:
   BACKEND_IMAGE: devops-project-backend
   FRONTEND_IMAGE: devops-project-frontend
 
+defaults:
+  run:
+    shell: bash
+    working-directory: project
+
 jobs:
   build-publish-deploy:
     name: Build, Publish and Deploy
