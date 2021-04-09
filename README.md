@@ -1,5 +1,19 @@
 # devopswithkubernetes
 
+- [devopswithkubernetes](#devopswithkubernetes)
+  - [Part 1](#part-1)
+  - [Part 2](#part-2)
+  - [Part 3](#part-3)
+    - [Exercise 3.01](#exercise-301)
+    - [Exercise 3.02](#exercise-302)
+    - [Exercise 3.03](#exercise-303)
+    - [Exercise 3.04](#exercise-304)
+    - [Exercise 3.05](#exercise-305)
+    - [Exercise 3.06](#exercise-306)
+      - [DBaaS](#dbaas)
+      - [DIY Database](#diy-database)
+    - [Exercise 3.07](#exercise-307)
+
 ## Part 1
 
 | Exercise | Directory                  |
@@ -116,3 +130,50 @@ Rules:
               /           random-string-svc:80 (10.0.2.8:3000)
               /pingpong   ping-pong-svc:80 (10.0.3.10:3000)
 ```
+
+### Exercise 3.03
+I added a workflow to build and deploy the project on every new push to the project directory. The workflow can be found here: [actions-release-server-to-gcp.yaml](https://github.com/niklasmtj/devopswithkubernetes/blob/main/.github/workflows/actions-release-server-to-gcp.yaml)
+
+### Exercise 3.04
+This workflow can be found here: [actions-release-branch-to-gcp.yaml](https://github.com/niklasmtj/devopswithkubernetes/blob/main/.github/workflows/actions-release-branch-to-gcp.yaml)
+
+### Exercise 3.05
+
+The workflow can be found here: [project-delete-branch.yaml](https://github.com/niklasmtj/devopswithkubernetes/blob/main/.github/workflows/project-delete-branch.yaml)
+
+### Exercise 3.06
+
+#### DBaaS
+**Pro**
+* No maintanance for DB version upgrades
+* Click to install
+* Support around the clock
+* Quick scaling 
+* Automated backups, replication, encryption patches and capacity increase
+* No provisioning
+
+
+**Contra**
+* Vendor Lockin
+* Costly and not included
+	* $36.18 per vCPU/month
+	* $6.18 per GB of Memory/month
+	* Shared-core instances for $9.20/month (0.6 GB RAM)
+* Costs when service traffic peaks is not predictable
+* Have to wait for the provider to do version upgrades
+
+#### DIY Database
+
+**Pro**
+* Free to choose version of database
+* Cheaper in monthly costs
+* Most of the work is already done because of the course
+* Quicker to address possible problems with database
+* Easier migration to different cloud provider or on-premise solution
+
+**Contra**
+* Manual implementation of backup method
+* More work to setup and maintain but already done
+
+### Exercise 3.07
+I choose the Postgres with PersistentVolumeClaims since this method is already done and I am more flexible about moving my application to another provider. Another reason is that the billing of this method is a lot more predictable.
