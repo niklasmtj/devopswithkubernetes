@@ -16,10 +16,10 @@ spec:
       containers:
         - name: project-frontend
           image: PROJECT/FRONTEND_IMAGE
-          # resources:
-          #   limits:
-          #     memory: "512Mi"
-          #     cpu: "500m"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "150m"
         - name: project-backend
           image: PROJECT/BACKEND_IMAGE
           env:
@@ -29,8 +29,8 @@ spec:
                 secretKeyRef:
                   name: project-db-secret
                   key: DATABASE_URL
-          # resources:
-          #   limits:
-          #     memory: "512Mi"
-          #     cpu: "500m"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "150m"
         
