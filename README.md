@@ -13,6 +13,7 @@
       - [DBaaS](#dbaas)
       - [DIY Database](#diy-database)
     - [Exercise 3.07](#exercise-307)
+    - [Exercise 3.10](#exercise-310)
 
 ## Part 1
 
@@ -56,9 +57,14 @@ The `project` is labeled as seen in the exercises. The releases can be found [he
 | -------- | -------------------------- |
 | 3.01     | `ping-pong`                |
 | 3.02     | `main-app` and `ping-pong` |
-| 3.03     | `project` |
-| 3.04     | `project` |
-| 3.05     | `project` |
+| 3.03     | `project`                  |
+| 3.04     | `project`                  |
+| 3.05     | `project`                  |
+| 3.06     | `project`                  |
+| 3.07     | `project`                  |
+| 3.08     | `project`                  |
+| 3.09     | `main-app` and `ping-pong` |
+| 3.10     | `project`                  |
 
 
 ### Exercise 3.01
@@ -177,3 +183,7 @@ The workflow can be found here: [project-delete-branch.yaml](https://github.com/
 
 ### Exercise 3.07
 I choose the Postgres with PersistentVolumeClaims since this method is already done and I am more flexible about moving my application to another provider. Another reason is that the billing of this method is a lot more predictable.
+
+### Exercise 3.10
+![GKE Monitoring Overview](pictures/overview.png)
+![GKE Project logs](pictures/logs.png)
