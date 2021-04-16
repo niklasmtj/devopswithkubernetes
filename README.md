@@ -4,6 +4,7 @@
   - [Part 1](#part-1)
   - [Part 2](#part-2)
   - [Part 3](#part-3)
+  - [Part 4](#part-4)
     - [Exercise 3.01](#exercise-301)
     - [Exercise 3.02](#exercise-302)
     - [Exercise 3.03](#exercise-303)
@@ -66,6 +67,10 @@ The `project` is labeled as seen in the exercises. The releases can be found [he
 | 3.09     | `main-app` and `ping-pong` |
 | 3.10     | `project`                  |
 
+## Part 4
+| Exercise | Directory                  |
+| -------- | -------------------------- |
+| 4.01     | `main-app` and `ping-pong` |
 
 ### Exercise 3.01
 

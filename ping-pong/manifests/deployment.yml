@@ -31,6 +31,12 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3000
           # volumeMounts: # Mount volume
           # - name: shared-image
           #   mountPath: /app/files

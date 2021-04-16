@@ -75,6 +75,15 @@ app.get('/', async (req, res) => {
   res.status(200).send(s);
 });
 
+app.get("/healthz", async (req, res) => {
+  try {
+    const answer = await fetch(`${BASE_URL}/healthz`).then((res) => res.status);
+    res.sendStatus(answer)
+  } catch (error) {
+    res.sendStatus(400);
+  }
+})
+
 const printingInterval = setInterval(async () => {
   const t = await readTimestamp();
   // pre Part 2
