@@ -71,6 +71,7 @@ The `project` is labeled as seen in the exercises. The releases can be found [he
 | Exercise | Directory                  |
 | -------- | -------------------------- |
 | 4.01     | `main-app` and `ping-pong` |
+| 4.01     | `project` |
 
 ### Exercise 3.01
 

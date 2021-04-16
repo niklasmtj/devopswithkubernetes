@@ -1,9 +1,10 @@
 import {Request, Response, Router} from 'express'
 import { Todo } from '../types/todos';
+import prisma from '../services/prisma-client';
+import { todos } from '.prisma/client';
 
 const router = Router();
-import { PrismaClient, todos } from '@prisma/client'
-const prisma = new PrismaClient()
+
 
 router.get("/", async (req: Request, res: Response) => {
   const todos = await prisma.todos.findMany();
