@@ -75,6 +75,7 @@ The `project` is labeled as seen in the exercises. The releases can be found [he
 | 4.01     | `main-app` and `ping-pong` |
 | 4.02     | `project`                  |
 | 4.03     | `root`                     |
+| 4.03     | `project`                  |
 
 ### Exercise 3.01
 

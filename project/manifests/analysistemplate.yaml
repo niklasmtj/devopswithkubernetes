@@ -1,0 +1,16 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: ram-consumption-after-deploy
+  namespace: project-ns
+spec:
+  metrics:
+    - name: ram-consumption-after-deploy
+      initialDelay: 10m
+      successCondition: result < 1.6 # Based limits in my deployment => (0.5 CPU *2 containers * 2 replicas)*0,8
+      provider:
+        prometheus:
+          address: http://kube-prometheus-stack-1618-prometheus.prometheus.svc:9090
+          query: |
+            scalar(sum(rate(container_cpu_usage_seconds_total{namespace="project-ns", container=~"project-.*"}[5m])))
