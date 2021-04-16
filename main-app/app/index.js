@@ -46,7 +46,7 @@ const readPingPongFile = async () => {
 }
 
 const getPingPongCount = async () => {
-  const {pingCounter} = await fetch(`${BASE_URL}/pingpong/ping`).then((res) => res.json())
+  const {pingCounter} = await fetch(`${BASE_URL}/ping`).then((res) => res.json())
   return pingCounter;
   // return (await fetch(`${BASE_URL}/ping`).then((res) => res.json()).pingCounter)
 }
