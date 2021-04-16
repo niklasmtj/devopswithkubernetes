@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project-ns
+  name: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  strategy:
+    canary:
+      steps:
+      - setWeight: 50
+      - analysis:
+          templates:
+          - templateName: restart-rate
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      containers:
+        - name: project-frontend
+          image: niklasmtj/devops-project-frontend:v1.3
+          # args:
+          # - /bin/sh
+          # - -c
+          # - touch /tmp/healthy;
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            initialDelaySeconds: 20 # Initial delay until the liveness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /
+               port: 3000
+          # readinessProbe:
+          #   initialDelaySeconds: 20 # Initial delay until the liveness is tested
+          #   periodSeconds: 5 # How often to test
+          #   httpGet:
+          #      path: /healthz
+          #      port: 3001
+        - name: project-backend
+          image: niklasmtj/devops-project-backend:v1.7
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                # Get Database URL from secret
+                secretKeyRef:
+                  name: project-db-secret
+                  key: DATABASE_URL
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            initialDelaySeconds: 20 # Initial delay until the liveness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3001
+          readinessProbe:
+            initialDelaySeconds: 20 # Initial delay until the liveness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz-db
+               port: 3001
+        

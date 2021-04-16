@@ -15,6 +15,8 @@
       - [DIY Database](#diy-database)
     - [Exercise 3.07](#exercise-307)
     - [Exercise 3.10](#exercise-310)
+  - [Part 4](#part-4-1)
+    - [Exercise 4.03](#exercise-403)
 
 ## Part 1
 
@@ -71,7 +73,8 @@ The `project` is labeled as seen in the exercises. The releases can be found [he
 | Exercise | Directory                  |
 | -------- | -------------------------- |
 | 4.01     | `main-app` and `ping-pong` |
-| 4.01     | `project` |
+| 4.02     | `project`                  |
+| 4.03     | `root`                     |
 
 ### Exercise 3.01
 
@@ -193,3 +196,11 @@ I choose the Postgres with PersistentVolumeClaims since this method is already d
 ### Exercise 3.10
 ![GKE Monitoring Overview](pictures/overview.png)
 ![GKE Project logs](pictures/logs.png)
+
+## Part 4
+
+### Exercise 4.03
+
+The Prometheus query that shows the number of pods created by StatefulSets in "prometheus" namespace is: `scalar(sum(kube_pod_info{namespace="prometheus", created_by_kind="StatefulSet"}))`
+
+The result then shows: "scalar 2"
