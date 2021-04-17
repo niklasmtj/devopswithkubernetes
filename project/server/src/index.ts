@@ -4,7 +4,6 @@ import path from 'path'
 import todosRoutes from './routes/todos'
 import helperRoutes from './routes/helper'
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import prismaClient from './services/prisma-client'
 
 dotenv.config();
@@ -15,8 +14,8 @@ const BASE_PATH = __dirname;
 
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json());
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname + "/public/index.html")));
 

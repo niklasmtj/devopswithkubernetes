@@ -25,4 +25,20 @@ router.post("/add", async (req: Request, res: Response) => {
   res.status(200).json({todos: todos})
 });
 
+router.get("/:todoId", async (req: Request, res: Response) => {
+  const {todoId} = req.params;
+  const todo: todos = await prisma.todos.findUnique({where: {id: +todoId}}) as todos;
+  res.status(200).json({todos: todo});
+})
+
+router.put("/update/:todoId/:todoStatus", async (req: Request, res: Response) => {
+  const {todoId, todoStatus} = req.params;
+  try {
+    const todo: todos = await prisma.todos.update({where: {id: +todoId}, data: {done: todoStatus === "true"}}) as todos;
+    res.status(200).json({todos: todo});
+  } catch (error) {
+    res.status(400).json({message: error, error: true})
+  }
+})
+
 export default router;

@@ -14,3 +14,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.todo-status-button {
+  padding: 5px;
+}
+
+.todo-status-button-inactive {
+  background-color: red;
+}
+.todo-status-button-active {
+  background-color: green;
+}
+
+.todo-status-button > svg {
+  vertical-align: middle;
+}
